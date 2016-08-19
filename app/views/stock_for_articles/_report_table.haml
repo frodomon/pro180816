@@ -1,0 +1,36 @@
+#wid-id-0.jarviswidget.jarviswidget-color-darken{"data-widget-editbutton" => "false"}
+  %header
+    %span.widget-icon
+      %i.fa.fa-table
+    %h2
+      = "Productos por vencer"
+  %div
+    .jarviswidget-editbox
+    .widget-body.no-padding
+      .widget-body-toolbar
+      %table#dt_basic.table.table-striped.table-bordered.table-hover
+        %thead
+          %tr
+            %th{"style"=>"text-align:center"} Articulo
+            %th{"style"=>"text-align:center"} Cantidad
+            %th{"style"=>"text-align:center"} Fecha de Vencimiento
+            %th{"style"=>"text-align:center"} Lote
+        %tbody
+          - @articles.each do |unit|
+            %tr
+              %td{"style"=>"text-align:center"}
+                = Article.find(unit.article_id).name
+              %td{"style"=>"text-align:center"}
+                = unit.quantity.to_s
+              %td{"style"=>"text-align:center"}
+                = unit.due_date.to_s
+              %td{"style"=>"text-align:center"}
+                = unit.lote.to_s
+
+:javascript
+  // DO NOT REMOVE : GLOBAL FUNCTIONS!
+  pageSetUp();
+
+  $(document).ready(function () {
+    $('[data-toggle="confirmation"]').confirmation();
+  });

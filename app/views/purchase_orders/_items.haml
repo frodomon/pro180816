@@ -1,0 +1,30 @@
+%tr(class="article_item"){id: "tr" + @reg_n.to_s}
+  %td{"style" => "display:none"}
+    %div
+      = text_field_tag 'purchase_order[purchase_order_details_attributes][' + @reg_n.to_s + '][article_id]', @article.id , class: "form-control", :required => true, title:'No puede dejar este campo vacio'
+  %td
+    %div
+      = text_field_tag 'purchase_order[purchase_order_details_attributes][' + @reg_n.to_s + '][article_name]', @article.name , class: "form-control", :required => true, title:'No puede dejar este campo vacio'
+  %td
+    %div
+      = text_field_tag 'purchase_order[purchase_order_details_attributes][' + @reg_n.to_s + '][description]', @article.unit_of_measurement , class: "form-control", :required => true, title:'No puede dejar este campo vacio', placeholder: "Descripción"
+  %td
+    %div
+      = text_field_tag 'purchase_order[purchase_order_details_attributes][' + @reg_n.to_s + '][quantity]', 0 , class: "form-control", :required => true, title:'No puede dejar este campo vacio', :style => "text-align:center;", onchange: 'calcularventa(' + @reg_n.to_s + ');'
+  %td
+    %div
+      = text_field_tag 'purchase_order[purchase_order_details_attributes][' + @reg_n.to_s + '][unit_price]', 0 , class: "form-control", :required => true, title:'No puede dejar este campo vacio', :style => "text-align:center;", onchange: 'calcularventa(' + @reg_n.to_s + ');'
+  %td
+    %div
+      = text_field_tag 'purchase_order[purchase_order_details_attributes][' + @reg_n.to_s + '][total_price]', 0 , class: "form-control", :required => true, title:'No puede dejar este campo vacio', :style => "text-align:center;"
+  %td
+    %div
+      = text_field_tag 'purchase_order[purchase_order_details_attributes][' + @reg_n.to_s + '][production_date]', "" , :required => true, class: 'form-control', :type => "date" , :style => "text-align:center;"
+  %td
+    %div
+      = text_field_tag 'purchase_order[purchase_order_details_attributes][' + @reg_n.to_s + '][due_date]', "" , :required => true, class: 'form-control', :type => "date" , :style => "text-align:center;"
+  %td
+    %div
+      = text_field_tag 'purchase_order[purchase_order_details_attributes][' + @reg_n.to_s + '][lote]', "" , class: "form-control", :required => true, title:'No puede dejar este campo vacio'
+  %td
+    %a{href: "javascript:delete_item('"+@reg_n.to_s+"')"}(class="btn") X

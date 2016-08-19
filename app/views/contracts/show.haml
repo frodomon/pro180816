@@ -1,0 +1,68 @@
+%article.col-sm-12.col-md-12.col-lg-12
+  #wid-id-0.jarviswidget.jarviswidget-color-greenDark{"data-widget-collapsed" => "false", "data-widget-deletebutton" => "false", "data-widget-editbutton" => "false"}
+    %header
+      %span.widget-icon
+        %i.fa.fa-table
+      %h2 Contrato
+    %div
+      .jarviswidget-editbox
+        / This area used as dropdown edit box
+      .widget-body.no-padding
+        %table.table.table-hover
+          %thead
+            %tr
+              %th Código
+              %th Cliente
+              %th Contrato
+              %th Codigo
+              %th Fecha
+          %tbody
+            %tr
+              %td 
+                = @contract.id.to_s
+              %td 
+                = Client.find(@contract.client_id).name + Client.find(@contract.client_id).ruc
+              %td 
+                = @contract.name.to_s
+              %td 
+                = @contract.code.to_s
+              %td 
+                = @contract.date_of_issue.to_s
+
+%h2 Detalle
+
+%article.col-sm-12.col-md-12.col-lg-12
+  #wid-id-0.jarviswidget.jarviswidget-color-greenDark{"data-widget-collapsed" => "false", "data-widget-deletebutton" => "false", "data-widget-editbutton" => "false"}
+    %header
+      %span.widget-icon
+        %i.fa.fa-table
+      %h2 Articulos
+    %div
+      .jarviswidget-editbox
+        / This area used as dropdown edit box
+      .widget-body.no-padding
+        %table.table.table-hover
+          %thead
+            %tr
+              %th Articulo
+              %th Cantidad
+              %th Precio x Unidad
+              %th Precio Total
+          %tbody
+            - @contract.contract_details.each do |unit|
+              %tr
+                %td 
+                  = Article.find(unit.article_id).name
+                %td 
+                  = unit.quantity
+                %td 
+                  = number_to_currency(unit.unit_price, unit: 'S/. ', precision: 2).to_s
+                %td 
+                  = number_to_currency(unit.total_price, unit: 'S/. ', precision: 2).to_s
+
+%button.btn.btn-sm.btn-primary.btn-prev#backlist{type: "button"} Volver
+:javascript
+
+  $('#backlist').click(function(){
+      load_url_ajax("#{contracts_path}", 'content', null, null, 'GET');
+  });

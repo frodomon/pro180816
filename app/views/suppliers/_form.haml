@@ -1,0 +1,101 @@
+#wid-id-0.jarviswidget{"data-widget-colorbutton" => "false", "data-widget-editbutton" => "false"}
+  %header
+    %span.widget-icon
+      %i.fa.fa-eye
+    %h2 Cliente
+  .widget-body
+    = simple_form_for([@supplier], html: {class: 'form-horizontal smart-form', autocomplete: 'off' }) do |f|
+      %fieldset
+        .row
+          %section.col.col-10
+            %label.label Razon Social
+            %label.input{for: "name"}
+              = f.input :name, placeholder: "Razon Social", input_html: { class: 'form-control' }, label: false
+        .row
+          %section.col.col-10
+            %label.label RUC
+            %label.input{for: "ruc"}
+              = f.input :ruc, placeholder: "RUC", input_html: { class: 'form-control' }, label: false
+        .row
+          %section.col.col-10
+            %label.label Dirección
+            %label.input{for: "address"}
+              = f.input :address, placeholder: "Dirección", input_html: { class: 'form-control' }, label: false
+        .row
+          %section.col.col-10
+            %label.label Teléfono
+            %label.input{for: "phone"}
+              = f.input :phone, placeholder: "Teléfono", input_html: { class: 'form-control' }, label: false
+        .row
+          %section.col.col-10
+            %label.label Contacto
+            %label.input{for: "contact"}
+              = f.input :contact, placeholder: "Contacto", input_html: { class: 'form-control' }, label: false
+      %footer
+        %button.btn.btn-primary{type: "submit"}
+          %i.fa.fa-save
+            Guardar
+
+:javascript
+  $(document).ready(function () {
+    if($('form[id^="edit_"]').length > 0) {
+      submit_validate($('form[id^="edit_"]'));
+    }else{
+      submit_validate($('#new_supplier'));
+    }
+    $("#client_code").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+      if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+          return false;
+      }
+    });
+  });
+
+  function submit_validate(form){
+    $(form['selector']).ajaxForm({
+      beforeSubmit: function() {
+        $(form['selector']).validate({
+          // Rules for form validation
+          rules : {
+            'supplier[name]' : {
+              required : true
+            },
+            'supplier[ruc]' : {
+              digits : true,
+              minlength : 8,
+              maxlength : 11
+            }
+          },
+
+          // Messages for form validation
+          messages : {
+            'supplier[name]' : {
+              required : 'Por favor, ingresar el nombre o razon social.'
+             },
+            'supplier[ruc]' : {
+              digits : 'Por favor, ingresar solo dígitos.',
+              maxlength: 'Debe ser 8 u 11 digitos',
+              minlength: 'Debe ser 8 u 11 dígitos'
+             }
+          },
+
+          // Do not change code below
+          errorPlacement : function(error, element) {
+            error.insertAfter(element.parent());
+          }
+        });
+        // Remove all Help-inLine
+        $(".help-inline").remove();
+        // Client Valid
+        return $(form['selector']).valid();
+      },
+      target: '#content',
+      success: function (data){
+        $(".help-inline").parent().addClass("state-error");
+      },
+      error: function(xhr, status, error) {
+      }
+    });
+  }

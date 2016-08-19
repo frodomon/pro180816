@@ -1,0 +1,196 @@
+#wid-id-0.jarviswidget{"data-widget-colorbutton" => "false", "data-widget-editbutton" => "false"}
+  %header
+    %span.widget-icon
+      %i.fa.fa-eye
+    %h2 Formato
+  .widget-body
+    = simple_form_for([@contract], html: {class: 'form-horizontal smart-form', autocomplete: 'off' }) do |f|
+      %fieldset
+        .row
+          %section.col.col-2
+          %section.col.col-6
+            %label.label Titulo
+            %label.input{for: "name"}
+              = f.input :name, placeholder: "Contrato", input_html: { class: 'form-control' }, label: false
+          %section.col.col-2
+            %label.label Código
+            %label.input{for: "devtime"}
+              = f.input :code, input_html: { class: 'form-control'}, label: false
+        .row
+          %section.col.col-2
+          %section.col.col-4
+            %label.label Fecha Inicio
+            %label.input{for: "start_date"}
+              = f.input :start_date, as: :string, input_html: { class: 'form-control', :type => "date", :value => @today}, label: false
+          %section.col.col-4
+            %label.label Fecha Fin
+            %label.input{for: "end_date"}
+              = f.input :end_date, as: :string, input_html: { class: 'form-control', :type => "date", :value => @today}, label: false
+        .row
+          %section.col.col-2
+          %section.col.col-4
+            %label.label Clientes
+            %select.form-control#client-select{:name =>"contract[client_id]", :required => true}
+              %option{:value => "", :rel => ""}
+                Seleccione
+              - @clients.each do |x|
+                %option{:value => "#{x.id}"}
+                  = x.name.to_s
+          %section.col.col-2
+            %label.label Fecha
+            %label.input{for: "date_of_issue"}
+              = f.input :date_of_issue, as: :string, input_html: { class: 'form-control', :type => "date", :value => @today}, label: false, disabled: true
+          %section.col.col-2
+            %label.label Monto Final
+            %label.input{for: "final_price"}
+              = f.input :final_price, input_html: { class: 'form-control'}, label: false
+        .row
+          .col-lg-11{'style'=>'margin-left:3%'}
+            .row{ :style => "margin-top:5%;"}
+              %section.col.col-md-1
+                %label.label Articulos
+              %section.col.col-md-4
+                %select.form-control#article-select{:name =>"article_id", :required => false}
+                  %option{:value => "", :rel => ""}
+                    Seleccione
+                  - @articles.each do |x|
+                    %option{:value => "#{x.id}"}
+                      = x.name.to_s
+              %a(href="javascript:add_item();" id="btn-add-item" class="btn btn-success" role="button" style="float:left")
+                Agregar Articulo
+            .row
+              %table.has-tickbox(class="table table-condensed table-bordered table-striped table-hover dataTable" style="font-size: 12px;" id="summary-items" aria-describedby="data-table_info")
+                %thead
+                  %tr
+                    %th Descripción
+                    %th Unidad de Medida
+                    %th Cantidad Total
+                    %th Precio Unit
+                    %th Monto Total
+                    %th X
+                %tbody(id="_items_table")
+        .row
+          .col-lg-11{'style'=>'margin-left:3%'}
+            .row{ :style => "margin-top:5%;"}
+              %a(href="javascript:add_item2();" id="btn-add-item2" class="btn btn-success" role="button" style="float:left")
+                Agregar Documento
+            .row
+              %table.has-tickbox(class="table table-condensed table-bordered table-striped table-hover dataTable" style="font-size: 12px;" id="summary-items" aria-describedby="data-table_info")
+                %thead
+                  %tr
+                    %th Documento
+                    %th X
+                %tbody(id="_items_table2")
+      %footer
+        %button.btn.btn-primary{type: "submit"}
+          %i.fa.fa-save
+            Guardar
+
+:javascript
+  $(document).ready(function () {
+    document.onkeypress = stopRKey;
+    if($('form[id^="edit_"]').length > 0) {
+      submit_validate($('form[id^="edit_"]'));
+    }else{
+      submit_validate($('#new_contract'));
+    }
+    $("#client_code").keypress(function (e) {
+     //if the letter is not digit then display error and don't type anything
+      if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+        //display error message
+        $("#errmsg").html("Digits Only").show().fadeOut("slow");
+          return false;
+      }
+    });
+  });
+
+  function submit_validate(form){
+    $(form['selector']).ajaxForm({
+      beforeSubmit: function() {
+        $(form['selector']).validate({
+          // Rules for form validation
+          rules : {
+            'cost_structure[money_id]' : {
+              required : true
+            },
+            'cost_structure[devtime]' : {
+              required : true
+            }
+          },
+
+          // Messages for form validation
+          messages : {
+            'cost_structure[money_id]' : {
+              required : 'Por favor, seleccione una moneda.'
+             },
+            'cost_structure[devtime]' : {
+              required : 'Por favor, el tiempo no puede estar vacío.'
+             }
+          },
+
+          // Do not change code below
+          errorPlacement : function(error, element) {
+            error.insertAfter(element.parent());
+          }
+        });
+        // Remove all Help-inLine
+        $(".help-inline").remove();
+        // Client Valid
+        return $(form['selector']).valid();
+      },
+      target: '#content',
+      success: function (data){
+        $(".help-inline").parent().addClass("state-error");
+      },
+      error: function(xhr, status, error) {
+      }
+    });
+  }
+  function add_item(){
+    str_item = {authenticity_token: "#{form_authenticity_token}",article_id: $('#article-select').val()};
+
+    append_url_ajax('#{add_item_contracts_path}', "_items_table", str_item, 0, 'POST');
+
+    var mySelect = document.getElementById('article-select');
+    mySelect.selectedIndex = 0;
+  }
+
+  function add_item2(){
+    str_item = {authenticity_token: "#{form_authenticity_token}"};
+
+    append_url_ajax('#{add_document_contracts_path}', "_items_table2", str_item, 0, 'POST');
+  }
+
+  function delete_item(code){
+    $("#tr" + code).remove();
+    calculartotal();
+  }
+
+  function stopRKey(evt) { 
+    var evt = (evt) ? evt : ((event) ? event : null); 
+    var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null); 
+    if ((evt.keyCode == 13) && (node.type=="text"))  {return false;} 
+  }
+
+
+  function calcularventa(element){
+    var quantity = document.getElementById("contract_contract_details_attributes_"+element+"_quantity").value;
+
+    var unit_price = document.getElementById("contract_contract_details_attributes_"+element+"_unit_price").value;
+
+    var total = quantity * unit_price;
+
+    total = Math.round(total * 100) / 100;
+
+    document.getElementById("contract_contract_details_attributes_"+element+"_total_price").value = total;
+    calculartotal();
+  }
+
+  function calculartotal(){
+    var prices = document.getElementsByClassName("form-control total_price");
+    totalprice = 0;
+    $.each(prices, function(){
+      totalprice = totalprice + Number($(this).val());
+    });
+    document.getElementById("contract_final_price").value = totalprice;
+  }

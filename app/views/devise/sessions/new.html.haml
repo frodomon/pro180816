@@ -1,0 +1,111 @@
+%body#login.animated.fadeInDown
+  / possible classes: minified, no-right-panel, fixed-ribbon, fixed-header, fixed-width
+  %header#header
+    / <span id="logo"></span>
+    #logo-group
+      %span#logo
+        = image_tag "logo.png.jpg", alt: "", title: "Propebis"
+      / END AJAX-DROPDOWN
+    %span#login-header-space
+      %span.hidden-mobile Necesita una cuenta?
+      %a.btn.btn-danger{:href => "#{new_user_registration_path}"} Crear cuenta
+  #main{role: "main"}
+    / MAIN CONTENT
+    #content.container
+      .row
+        .col-xs-12.col-sm-12.col-md-7.col-lg-8.hidden-xs.hidden-sm
+          %h1.txt-color-red.login-header-big Propebis
+          .hero
+            .pull-left.login-desc-box-l
+              %h4.paragraph-header Descripcións
+              .login-app-icons
+                
+            = image_tag 'demo/iphoneview.png', alt: "SmartAdmin", class: "pull-right display-image", style: "width:210px"
+
+        .col-xs-12.col-sm-12.col-md-5.col-lg-4
+          .well.no-padding
+            = form_for(resource, :as => resource_name, :html => {:class => "smart-form client-form", :id => "login-form"}, :url => session_path(resource_name)) do |f|
+              %header
+                Inicio de Sesión
+              %fieldset
+                %section
+                  %label.label Correo
+                  %label.input
+                    %i.icon-append.fa.fa-user
+                    = f.email_field :email, :autofocus => true
+                    %b.tooltip.tooltip-top-right
+                      %i.fa.fa-user.txt-color-teal
+                      Please enter email address
+                %section
+                  %label.label Contraseña
+                  %label.input
+                    %i.icon-append.fa.fa-lock
+                    = f.password_field :password
+                    %b.tooltip.tooltip-top-right
+                      %i.fa.fa-lock.txt-color-teal
+                      Enter your password
+              %footer
+                %button.btn.btn-primary{type: "submit"}
+                  Ingresar
+
+    / ==================================================
+    /
+      PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+      <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+    / Link to Google CDN's jQuery + jQueryUI; fall back to local
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"
+    :javascript
+      if (!window.jQuery) { document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');}
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"
+    :javascript
+      if (!window.jQuery.ui) { document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');}
+    /
+      JS TOUCH : include this plugin for mobile drag / drop touch events
+      <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
+    / JQUERY VALIDATE
+    = javascript_include_tag 'plugin/jquery-validate/jquery.validate.min'
+    / JQUERY MASKED INPUT
+    = javascript_include_tag 'plugin/masked-input/jquery.maskedinput.min'
+    / browser msie issue fix
+    = javascript_include_tag 'plugin/msie-fix/jquery.mb.browser.min'
+    / SmartClick: For mobile devices
+    = javascript_include_tag 'plugin/smartclick/smartclick'
+    /[if IE 7]
+      <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    / MAIN APP JS FILE
+    = javascript_include_tag 'app'
+    :javascript
+      runAllForms();
+
+      $(function() {
+      	// Validation
+      	$("#login-form").validate({
+      		// Rules for form validation
+      		rules : {
+      			'user[email]' : {
+      				required : true,
+      				email : true
+      			},
+      			'user[password]' : {
+      				required : true,
+      				minlength : 8
+      			}
+      		},
+
+      		// Messages for form validation
+      		messages : {
+      			'user[email]' : {
+      				required : 'Please enter your email address',
+      				email : 'Please enter a VALID email address'
+      			},
+      			'user[password]' : {
+      				required : 'Please enter your password'
+      			}
+      		},
+
+      		// Do not change code below
+      		errorPlacement : function(error, element) {
+      			error.insertAfter(element.parent());
+      		}
+      	});
+      });
