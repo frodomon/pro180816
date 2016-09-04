@@ -1,0 +1,223 @@
+!!!
+%html{lang: "en-us"}
+  %head
+    %meta{charset: "utf-8"}
+    / <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    %title Propebis
+    %link{:href => "assets/favicon/favicon.ico", :rel => "icon", :type => "image/ico"}
+    %meta{content: "", name: "description"}
+    %meta{content: "", name: "author"}
+    /
+      Use the correct meta names below for your web application
+      Ref: http://davidbcalhoun.com/2010/viewport-metatag
+      
+      <meta name="HandheldFriendly" content="True">
+      <meta name="MobileOptimized" content="320">
+    %meta{content: "width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no", name: "viewport"}
+    / Basic Styles
+    = stylesheet_link_tag "bootstrap.min", media: "screen", rel: "stylesheet", type: "text/css"
+    = stylesheet_link_tag "font-awesome.min", media: "screen", rel: "stylesheet", type: "text/css"
+    
+    / SmartAdmin Styles : Please note (smartadmin-production.css) was created using LESS variables
+    = stylesheet_link_tag "smartadmin-production", media: "screen", rel: "stylesheet", type: "text/css"
+    = stylesheet_link_tag "smartadmin-production_unminified", media: "screen", rel: "stylesheet", type: "text/css"
+    = stylesheet_link_tag "smartadmin-skins", media: "screen", rel: "stylesheet", type: "text/css"
+    /
+      SmartAdmin RTL Support is under construction
+      <link rel="stylesheet" type="text/css" media="screen" href="css/smartadmin-rtl.css">
+    / Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp
+    = stylesheet_link_tag "custom", media: "screen", rel: "stylesheet", type: "text/css"
+    /JS
+    = javascript_include_tag 'application'
+    / TOKEN
+    = csrf_meta_tag
+    / FAVICONS
+    =# stylesheet_link_tag "smartadmin-production.min", media: "screen", rel: "stylesheet", type: "text/css"
+    =# stylesheet_link_tag "smartadmin-production.min", media: "screen", rel: "stylesheet", type: "text/css"
+    / GOOGLE FONT
+    %link{href: "http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700", rel: "stylesheet"}
+  %body
+    / possible classes: minified, fixed-ribbon, fixed-header, fixed-width
+    / HEADER
+    %header#header
+      #logo-group
+        / PLACE YOUR LOGO HERE
+        %span#logo
+          = image_tag "logo.png", alt: "", title: "Propebis"
+        / END LOGO PLACEHOLDER
+        /
+        / END AJAX-DROPDOWN
+      / projects dropdown
+      / end projects dropdown
+      / pulled right: nav area
+      .pull-right
+        / collapse menu button
+        #hide-menu.btn-header.pull-right
+          %span
+            %a{:href => "javascript:void(0);", :title => "Collapse Menu"}
+              %i.fa.fa-reorder
+        / end collapse menu
+        / logout button
+        #logout.btn-header.transparent.pull-right
+          %span
+            %a{href: "#{destroy_user_session_path}", title: 'Sign out'}
+              %i.fa.fa-sign-out
+        / end logout button
+        / search mobile button (this is hidden till mobile view port)
+        #search-mobile.btn-header.transparent.pull-right
+          %span
+            %a{:href => "javascript:void(0)", :title => "Search"}
+              %i.fa.fa-search
+        / end search mobile button
+        / input: search field
+
+        / end input: search field
+        / multiple lang dropdown : find all flags in the image folder
+        
+        / end multiple lang
+      / end pulled right: nav area
+    / END HEADER
+    / Left panel : Navigation area
+    / Note: This width of the aside area can be adjusted through LESS variables
+    %aside#left-panel
+      / User info
+      .login-info
+        %span
+          %a#show-shortcut{href: "javascript:void(0);"}
+            = "#{current_user.names}"
+      / end user info
+      /
+        NAVIGATION : This navigation is also responsive
+        
+        To make this navigation dynamic please make sure to link the node
+        (the reference to the nav > ul) after page load. Or the navigation
+        will not initialize.
+      %nav
+        /
+          NOTE: Notice the gaps after each icon usage <i></i>..
+          Please note that these links work a bit different than
+          traditional href="" links. See documentation for details.
+        %ul
+          %li
+            %a{href: "#{inbox_task_main_path}", title: "Tareas"}
+              %i.fa.fa-lg.fa-fw.fa-inbox
+              %span.menu-item-parent Inbox
+              %span.badge.pull-right.inbox-badge#input_inbox
+          %li
+            %a{href: "#", title: "Módulo de Mantenimiento"}
+              %i.fa.fa-lg.fa-fw.fa-book
+              %span.menu-item-parent Mantenimiento
+            %ul
+              %li
+                %a{href: "#{clients_path}", title: "Clientes"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Clientes
+              %li
+                %a{href: "#{suppliers_path}", title: "Proveedores"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Proveedores
+              %li
+                %a{href: "#{transports_path}", title: "Unidades de Transporte"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Unidades de Transporte
+          %li
+            %a{href: "#", title: "Módulo de Almacen y Artículos"}
+              %i.fa.fa-lg.fa-fw.fa-book
+              %span.menu-item-parent Almacen y Artículos
+            %ul
+              %li
+                %a{href: "#{articles_path}", title: "Artículos"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Artículos
+              %li
+                %a{href: "#{stock_for_articles_path}", title: "Almacen"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Almacen
+          %li
+            %a{href: "#", title: "Módulo de Ventas y Compras"}
+              %i.fa.fa-lg.fa-fw.fa-book
+              %span.menu-item-parent Ventas y Compras
+            %ul
+              %li
+                %a{href: "#{contracts_path}", title: "Contratos"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Contratos
+              %li
+                %a{href: "#{remission_guides_path}", title: "Guias de Remisión"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Guias de Remisión
+              %li
+                %a{href: "#{purchase_orders_path}", title: "Ordenes de Compra"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Ordenes de Compra
+              %li
+                %a{href: "#{vouchers_path}", title: "Facturas"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Facturas
+
+      %span.minifyme
+        %i.fa.fa-arrow-circle-left.hit
+    / END NAVIGATION
+    / MAIN PANEL
+    #main{role: "main"}
+      #ribbon
+        %ol.breadcrumb
+      / MAIN CONTENT
+      #content
+      / END MAIN CONTENT
+    / END MAIN PANEL
+
+    %a#dialog{'data-toggle' => 'modal', 'href' => "#", 'data-target' => "#modalLoading"}
+
+    #modalLoadingLabelading.modal.fade{"aria-hidden" => "true", "aria-labelledby" => "modalLoadingLabel", role: "dialog", tabindex: "-1", "data-keyboard"=>false, "data-backdrop"=>"static"}
+      .modal-dialog
+        .modal-content
+          .modal-body
+            .row
+              .col-sm-12
+                %h3 Cargando Contenido...
+                .progress.progress-sm.progress-striped.active
+                  .progress-bar.bg-color-darken{role: "progressbar", style: "width: 100%"}
+    / ==================================================
+    /
+      PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)
+      <script data-pace-options='{ "restartOnRequestAfter": true }' src="js/plugin/pace/pace.min.js"></script>
+    / Link to Google CDN's jQuery + jQueryUI; fall back to local
+    = javascript_include_tag '//ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js'
+    :javascript
+      if (!window.jQuery) {
+        document.write('<script src="js/libs/jquery-2.0.2.min.js"><\/script>');
+      }
+    = javascript_include_tag "//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"
+    :javascript
+      if (!window.jQuery.ui) {
+        document.write('<script src="js/libs/jquery-ui-1.10.3.min.js"><\/script>');
+      }
+    /
+      JS TOUCH : include this plugin for mobile drag / drop touch events
+      <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script>
+    / BOOTSTRAP JS
+    = javascript_include_tag 'bootstrap/bootstrap'
+    = javascript_include_tag 'bootstrap/bootstrap-tooltip'
+    = javascript_include_tag 'bootstrap/bootstrap-confirmation'
+    / CUSTOM NOTIFICATION
+    = javascript_include_tag 'notification/SmartNotification.min'
+    / JQUERY VALIDATE
+    = javascript_include_tag 'plugin/jquery-validate/jquery.validate.min'
+    / JQUERY MASKED INPUT
+    = javascript_include_tag 'plugin/masked-input/jquery.maskedinput.min'
+    / JQUERY SELECT2 INPUT
+    = javascript_include_tag 'plugin/select2/select2.min'
+    / browser msie issue fix
+    = javascript_include_tag 'plugin/msie-fix/jquery.mb.browser.min'
+    / SmartClick: For mobile devices
+    = javascript_include_tag 'plugin/smartclick/smartclick'
+    / JQUERY FORM
+    = javascript_include_tag 'plugin/jquery-form/jquery-form.min'
+    /[if IE 7]
+      <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+    / Demo purpose only
+    //= javascript_include_tag 'demo'
+    / MAIN APP JS FILE
+    = javascript_include_tag 'app'
+    / Your GOOGLE ANALYTICS CODE Below

@@ -1,0 +1,6 @@
+%tr(class="article_item2"){id: "tr" + @reg_n.to_s}
+  %td{"style"=>"width:85%;"}
+    %div
+      = file_field_tag 'contract[contract_documents_attributes][' + @reg_n.to_s + '][document]', class: "string optional form-control", :required => true, title:'No puede dejar este campo vacio'
+  %td{"style"=>"width:15%;"}
+    %a{href: "javascript:delete_item('"+@reg_n.to_s+"')"}(class="btn") X

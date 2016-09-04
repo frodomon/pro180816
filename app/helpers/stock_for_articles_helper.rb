@@ -1,0 +1,2 @@
+module StockForArticlesHelper
+end
