@@ -14,7 +14,11 @@ development:
   adapter: mysql2
   database: propebis
   username: root
+<<<<<<< HEAD
   password: secret
+=======
+  password: KaiHatSuLaBs$01
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
   encoding: utf8
   host: localhost
 
@@ -25,7 +29,11 @@ test:
   adapter: mysql2
   database: propebis_testing
   username: root
+<<<<<<< HEAD
   password: secret
+=======
+  password: KaiHatSuLaBs$01
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
   encoding: utf8
   host: localhost
 
@@ -33,6 +41,10 @@ production:
   adapter: mysql2
   database: propebis_production
   username: root
+<<<<<<< HEAD
   password: secret
+=======
+  password: KaiHatSuLaBs$01
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
   encoding: utf8
   host: localhost

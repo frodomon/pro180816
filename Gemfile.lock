@@ -141,7 +141,11 @@ GEM
       activesupport (= 4.0.3)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+<<<<<<< HEAD
     rake (11.2.2)
+=======
+    rake (10.3.2)
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
     rdoc (4.1.2)
       json (~> 1.4)
     ref (1.0.5)
@@ -253,6 +257,9 @@ DEPENDENCIES
   twitter-bootstrap-rails
   uglifier (>= 1.3.0)
   will_paginate (~> 3.0.7)
+<<<<<<< HEAD
 
 BUNDLED WITH
    1.10.6
+=======
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11

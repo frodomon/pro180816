@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20161012184029) do
 
   create_table "articles", force: true do |t|
@@ -144,6 +145,9 @@ ActiveRecord::Schema.define(version: 20161012184029) do
     t.datetime "updated_at"
     t.string   "trademark"
   end
+=======
+ActiveRecord::Schema.define(version: 20150922154528) do
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -158,12 +162,16 @@ ActiveRecord::Schema.define(version: 20161012184029) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+<<<<<<< HEAD
     t.string   "names"
+=======
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
+<<<<<<< HEAD
   create_table "voucher_details", force: true do |t|
     t.integer  "voucher_id"
     t.integer  "article_id"
@@ -182,4 +190,6 @@ ActiveRecord::Schema.define(version: 20161012184029) do
     t.date     "date_of_issue"
   end
 
+=======
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
 end

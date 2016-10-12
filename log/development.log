@@ -31175,6 +31175,7 @@ Started GET "/assets/favicon/logo_tlc2.ico" for 127.0.0.1 at 2015-09-22 11:46:39
 
 
 Started GET "/assets/favicon/logo_tlc2.ico" for 127.0.0.1 at 2015-09-22 11:46:39 -0500
+<<<<<<< HEAD
 
 
 Started GET "/" for 127.0.0.1 at 2016-09-04 11:02:45 -0500
@@ -37953,3 +37954,5 @@ Processing by TransportsController#index as */*
   Rendered transports/_table.haml (6.7ms)
   Rendered transports/index.html.haml (15.2ms)
 Completed 200 OK in 23ms (Views: 20.3ms | ActiveRecord: 0.7ms)
+=======
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11

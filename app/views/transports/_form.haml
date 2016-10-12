@@ -13,9 +13,15 @@
               = f.input :plate, placeholder: "Placa", input_html: { class: 'form-control' }, label: false
         .row
           %section.col.col-10
+<<<<<<< HEAD
             %label.label Marca/Modelo
             %label.input{for: "code"}
               = f.input :trademark, placeholder: "Marca Modelo", input_html: { class: 'form-control' }, label: false
+=======
+            %label.label Numero de Inscripción
+            %label.input{for: "code"}
+              = f.input :inscriptions, placeholder: "Numero de Inscripción", input_html: { class: 'form-control' }, label: false
+>>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
       %footer
         %button.btn.btn-primary{type: "submit"}
           %i.fa.fa-save
