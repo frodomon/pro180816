@@ -12,7 +12,7 @@
           %tr
             %th #
             %th Placa
-            %th Numero de Inscripción
+            %th Marca/Modelo
             %th Acciones
         %tbody
           - @transport.each do |unit|
@@ -22,7 +22,7 @@
               %td 
                 = unit.plate
               %td 
-                = unit.inscriptions
+                = unit.trademark
               %td
                 %a.btn.btn-warning.btn-xs{:onclick => "javascript:load_url_ajax('#{edit_transport_path(unit.id)}', 'content', null, null, 'GET')"}
                   Editar

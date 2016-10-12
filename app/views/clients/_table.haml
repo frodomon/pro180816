@@ -14,6 +14,7 @@
             %th Nombre
             %th Ruc
             %th Dirección
+            %th Contacto
             %th Acciones
         %tbody
           - @client.each do |unit|
@@ -26,6 +27,8 @@
                 = unit.ruc
               %td
                 = unit.address
+              %td
+                = unit.contact
               %td
                 %a.btn.btn-warning.btn-xs{:onclick => "javascript:load_url_ajax('#{edit_client_path(unit.id)}', 'content', null, null, 'GET')"}
                   Editar
