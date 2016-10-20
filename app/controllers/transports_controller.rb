@@ -61,10 +61,6 @@ class TransportsController < ApplicationController
   
   private
   def transport_parameters
-<<<<<<< HEAD
     params.require(:transport).permit(:plate,:trademark)
-=======
-    params.require(:transport).permit(:plate,:inscriptions)
->>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
   end
 end

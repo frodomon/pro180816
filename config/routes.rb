@@ -1,4 +1,20 @@
 Rails.application.routes.draw do
+  resources :products_lots do
+    collection do
+      post 'movements'
+      post 'due_front'
+      post 'due_method'
+      post 'lote_front'
+      post 'lote_method'
+      get 'lote_by_product/:product_id' => 'products_lots#lote_by_product', as: :lote_by_product
+      get 'empty_lots/:product_id' => 'products_lots#empty_lots', as: :empty_lots
+    end
+  end
+
+  resources :businesses
+
+  resources :drivers
+
   devise_for :users, :controllers => { :registrations => "users/registrations" }
   root 'main#index'
   get 'inbox_task' => 'main#inbox_task', as: :inbox_task_main
@@ -17,8 +33,10 @@ Rails.application.routes.draw do
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
   resources :clients
+  resources :drivers
+  resources :categories
   resources :suppliers
-  resources :articles
+  resources :products
   resources :transports
   resources :stock_for_articles do
     collection do

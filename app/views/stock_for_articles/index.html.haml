@@ -3,7 +3,7 @@
     .col-xs-12.col-sm-7.col-md-7.col-lg-4
       %h2.page-title.txt-color-blueDark
         %i.fa.fa-pencil-square-o.fa-fw 
-        Articulos en Almacen
+        Productos en el Almacén
       - if flash[:notice] !=nil
         .alert.alert-success.fade.in{"style" => "clear:both"}
           %button.close{"data-dismiss" => "alert"}
@@ -21,7 +21,7 @@
   .row
     .col-md-2
       %button.btn.btn-primary.btn-mini{:onclick => "javascript:load_url_ajax('#{due_front_stock_for_articles_path}', 'content', null, null, 'POST')"}
-        Productos por Vencer
+        Lotes por Vencer
     .col-md-2
       %button.btn.btn-primary.btn-mini{:onclick => "javascript:load_url_ajax('#{lote_front_stock_for_articles_path}', 'content', null, null, 'POST')"}
         Lotes por producto

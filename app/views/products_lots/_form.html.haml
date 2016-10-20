@@ -1,0 +1,104 @@
+#wid-id-0.jarviswidget{"data-widget-colorbutton" => "false", "data-widget-editbutton" => "false"}
+  %header
+    %span.widget-icon
+      %i.fa.fa-eye
+    %h2 Lote de Producto
+  .widget-body
+    = simple_form_for([@products_lot], html: {class: 'form-horizontal smart-form', autocomplete: 'off' }) do |f|
+      %fieldset
+        .row
+          %section.col.col-md-5
+            %label.label Producto
+            %select.form-control#product-select{:name =>"products_lot[product_id]", :required => true}
+              %option{:value => "", :rel => ""}
+                Seleccione
+              - @products.each do |x|
+                %option{:value => "#{x.id}"}
+                  = x.name.to_s
+          %section.col.col-md-5
+            %label.label Cantidad
+            %label.input{for: "quantity"}
+              = f.number_field :quantity, placeholder: "0", input_html: { class: 'form-control' }, label: false
+        .row
+          %section.col.col-md-5
+            %label.label Número de Lote
+            %label.input{for: "lot_number"}
+              = f.text_field :lot_number, placeholder: "Número de Lote", input_html: { class: 'form-control' }, label: false
+          %section.col.col-md-5
+            %label.label Registro Sanitario
+            %label.input{for: "sanitary_registry"}
+              = f.text_field :sanitary_registry, placeholder: "Registro Sanitario", input_html: { class: 'form-control' }, label: false
+        .row
+          %section.col.col-md-5
+            %label.label Fecha de Producción
+            %label.input{for: "production_date"}
+              = f.date_field :production_date, input_html: { class: 'form-control' }, label: false
+          %section.col.col-md-5
+            %label.label Fecha de Vencimiento
+            %label.input{for: "due_date"}
+              = f.date_field :due_date, input_html: { class: 'form-control' }, label: false 
+      %footer
+        %button.btn.btn-primary{type: "submit"}
+          %i.fa.fa-save
+            Guardar
+
+:javascript
+  
+  $(document).ready(function () {
+    if($('form[id^="edit_"]').length > 0) {
+      submit_validate($('form[id^="edit_"]')); 
+      id = "#{ @products_lot.product_id.to_json }"; 
+      $('#product-select option[value="'+id+'"]').prop('selected', 'selected')
+    }else{
+      submit_validate($('#new_products_lot'));
+    }
+  });
+
+  function submit_validate(form){
+    $(form['selector']).ajaxForm({
+      beforeSubmit: function() {
+        $(form['selector']).validate({
+          // Rules for form validation
+          rules : {
+            'products_lot[product_id]' : {
+              required : true
+            },
+            'products_lot[quantity]' : {
+              required : true
+            },
+            'products_lot[due_date]'  : {  
+              required : true,
+            }
+          },
+
+          // Messages for form validation
+          messages : {
+            'product[name]' : {
+              required : 'Por favor, ingresar el nombre o razon social.'
+             },
+            'product[unit_of_measurement]' : {
+              required : 'Por favor, ingresar la unidad de medida.'
+             },
+            'product[quantity]' : {
+              required : 'Por favor, ingresar la cantidad.'
+             }
+          },
+
+          // Do not change code below
+          errorPlacement : function(error, element) {
+            error.insertAfter(element.parent());
+          }
+        });
+        // Remove all Help-inLine
+        $(".help-inline").remove();
+        // Client Valid
+        return $(form['selector']).valid();
+      },
+      target: '#content',
+      success: function (data){
+        $(".help-inline").parent().addClass("state-error");
+      },
+      error: function(xhr, status, error) {
+      }
+    });
+  }

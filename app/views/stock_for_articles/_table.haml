@@ -11,23 +11,38 @@
         %thead
           %tr
             %th #
-            %th Código
             %th Nombre
+            %th Marca
+            %th Unidad de Medida
             %th Cantidad
+            %th Número de Lote
+            %th Registro Sanitario
+            %th Fecha de Producción
+            %th Fecha de Vencimiento
             %th Acciones
         %tbody
-          - @article.each do |unit|
+          - @product.each do |unit|
             %tr
               %td 
                 = unit.id
               %td 
-                = unit.code
-              %td 
                 = unit.name
               %td
-                = unit.stock
+                = unit.trademark
               %td
-                %a.btn.btn-info.btn-xs{:onclick => "javascript:load_url_ajax('#{edit_article_path(unit.id)}', 'content', null, null, 'GET')"}
+                = unit.unit_of_measurement
+              %td
+                = unit.quantity
+              %td
+                = unit.lot_number
+              %td
+                = unit.sanitary_registry
+              %td
+                = unit.production_date
+              %td
+                = unit.due_date
+              %td
+                %a.btn.btn-info.btn-xs{:onclick => "javascript:load_url_ajax('#{edit_product_path(unit.id)}', 'content', null, null, 'GET')"}
                   Entradas y Salidas
 
 :javascript

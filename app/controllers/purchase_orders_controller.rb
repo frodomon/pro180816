@@ -15,6 +15,7 @@ class PurchaseOrdersController < ApplicationController
     @purchase_order = PurchaseOrder.new
     @articles = Article.all
     @suppliers = Supplier.all
+    @today = Time.now.to_date
     render layout: false
   end
 

@@ -15,7 +15,7 @@
           %section.col.col-2
             %label.label Código
             %label.input{for: "devtime"}
-              = f.input :code, input_html: { class: 'form-control'}, label: false
+              = f.input :code, input_html: { class: 'form-control'}, label: false, disabled: true
         .row
           %section.col.col-2
           %section.col.col-4
@@ -37,13 +37,13 @@
                 %option{:value => "#{x.id}"}
                   = x.name.to_s
           %section.col.col-2
-            %label.label Fecha
+            %label.label Fecha de Inscripción
             %label.input{for: "date_of_issue"}
-              = f.input :date_of_issue, as: :string, input_html: { class: 'form-control', :type => "date", :value => @today}, label: false, disabled: true
+              = f.date_field :date_of_issue, as: :string, input_html: { class: 'form-control', :type => "date", :value => @today}, label: false, disabled: true
           %section.col.col-2
             %label.label Monto Final
             %label.input{for: "final_price"}
-              = f.input :final_price, input_html: { class: 'form-control'}, label: false
+              = f.number_field :final_price, input_html: { class: 'form-control'}, label: false, disabled: true
         .row
           .col-lg-11{'style'=>'margin-left:3%'}
             .row{ :style => "margin-top:5%;"}

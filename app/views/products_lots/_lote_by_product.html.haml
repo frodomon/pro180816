@@ -1,0 +1,20 @@
+#content-inside
+  .row
+    .col-xs-12.col-sm-7.col-md-7.col-lg-4
+      %h1.page-title.txt-color-blueDark
+        %i.fa.fa-pencil-square-o.fa-fw 
+        Lotes por Producto
+  %br
+  .row
+    #widget-grid 
+      %article.col-xs-12.col-sm-12.col-md-12.col-lg-12
+        = render :partial => 'report_lote_by_product'
+        
+  %button.btn.btn-sm.btn-primary.btn-prev#backlist-entity{type: "button"}
+    %i.fa.fa-arrow-left>
+    Retornar al listado
+
+:javascript
+  $('#backlist-entity').click(function(){
+    load_url_ajax("#{products_lots_path}", 'content', null, null, 'GET');
+  });

@@ -11,18 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20161012184029) do
+ActiveRecord::Schema.define(version: 20161018223335) do
 
-  create_table "articles", force: true do |t|
+  create_table "businesses", force: true do |t|
     t.string   "name"
-    t.string   "code"
-    t.string   "unit_of_measurement"
-    t.float    "stock"
+    t.string   "ruc"
+    t.string   "address"
+    t.string   "phone"
+    t.string   "contact"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "sanitary_registry"
-    t.string   "trademark"
   end
 
   create_table "categories", force: true do |t|
@@ -74,6 +72,38 @@ ActiveRecord::Schema.define(version: 20161012184029) do
     t.float    "final_price"
     t.float    "missing_payment"
   end
+
+  create_table "drivers", force: true do |t|
+    t.string   "license"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "products", force: true do |t|
+    t.string   "name"
+    t.string   "unit_of_measurement"
+    t.string   "description"
+    t.string   "trademark"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+
+  create_table "products_lots", force: true do |t|
+    t.float    "quantity"
+    t.string   "sanitary_registry"
+    t.date     "due_date"
+    t.string   "lot_number"
+    t.date     "production_date"
+    t.integer  "product_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "products_lots", ["product_id"], name: "index_products_lots_on_product_id", using: :btree
 
   create_table "purchase_order_details", force: true do |t|
     t.datetime "created_at"
@@ -145,9 +175,6 @@ ActiveRecord::Schema.define(version: 20161012184029) do
     t.datetime "updated_at"
     t.string   "trademark"
   end
-=======
-ActiveRecord::Schema.define(version: 20150922154528) do
->>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -162,16 +189,12 @@ ActiveRecord::Schema.define(version: 20150922154528) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-<<<<<<< HEAD
     t.string   "names"
-=======
->>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
-<<<<<<< HEAD
   create_table "voucher_details", force: true do |t|
     t.integer  "voucher_id"
     t.integer  "article_id"
@@ -190,6 +213,4 @@ ActiveRecord::Schema.define(version: 20150922154528) do
     t.date     "date_of_issue"
   end
 
-=======
->>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
 end

@@ -14,10 +14,7 @@
             %th Nombre
             %th Ruc
             %th Dirección
-<<<<<<< HEAD
             %th Contacto
-=======
->>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
             %th Acciones
         %tbody
           - @client.each do |unit|
@@ -31,11 +28,8 @@
               %td
                 = unit.address
               %td
-<<<<<<< HEAD
                 = unit.contact
               %td
-=======
->>>>>>> d430aa2ef6ecc00c903e6a56803c3a9bf9a7fc11
                 %a.btn.btn-warning.btn-xs{:onclick => "javascript:load_url_ajax('#{edit_client_path(unit.id)}', 'content', null, null, 'GET')"}
                   Editar
                 %a.btn.btn-danger.btn-xs{:data => {:toggle => 'confirmation', :placement => 'left', :title => 'Esta seguro de eliminar el item ' + "#{unit.id}?", :singleton => 'true', :popout => 'true', :onclick => "javascript:delete_to_url('#{client_path(unit.id)}' + '?authenticity_token=#{form_authenticity_token}', 'content', '#{clients_path}')"}}

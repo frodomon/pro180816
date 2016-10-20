@@ -3,7 +3,7 @@ class StockForArticlesController < ApplicationController
   protect_from_forgery with: :null_session, :only => [:destroy, :delete]
 
   def index
-    @article = Article.all
+    @product = Product.all
     render layout: false
   end
 
@@ -13,18 +13,18 @@ class StockForArticlesController < ApplicationController
 
   def due_method
     limit_date = params[:end_date]
-    @articles = PurchaseOrderDetail.where("due_date >= ?",limit_date)
+    @products = Product.where("due_date <= ?",limit_date)
     render(partial: 'report_table', :layout => false)
   end
 
   def lote_front
-    @articles = Article.all
+    @products = Product.all
     render(partial: 'lote_front', :layout => false)
   end
 
   def lote_method
     article_id = params[:article_id]
-    @articles = PurchaseOrderDetail.where("article_id = ?",article_id)
+    @products = Product.where("id = ?",article_id)
     render(partial: 'report_lote_table', :layout => false)
   end
 end

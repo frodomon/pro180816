@@ -15,7 +15,7 @@
                 %select.form-control#article-select{:name =>"article_id", :required => false}
                   %option{:value => "", :rel => ""}
                     Seleccione
-                  - @articles.each do |x|
+                  - @products.each do |x|
                     %option{:value => "#{x.id}"}
                       = x.name.to_s
           %br

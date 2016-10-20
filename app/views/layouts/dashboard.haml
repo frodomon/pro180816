@@ -117,22 +117,34 @@
                   %i.fa.fa-lg.fa-fw.fa-list-alt
                   %span.menu-item-parent Proveedores
               %li
+                %a{href: "#{businesses_path}", title: "Empresas"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Empresas    
+              %li
                 %a{href: "#{transports_path}", title: "Unidades de Transporte"}
                   %i.fa.fa-lg.fa-fw.fa-list-alt
                   %span.menu-item-parent Unidades de Transporte
+              %li
+                %a{href: "#{drivers_path}", title: "Transportistas"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Transportistas
+              %li
+                %a{href: "#{categories_path}", title: "Categorías"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Categorías
+              %li
+                %a{href: "#{products_path}", title: "Productos"}
+                  %i.fa.fa-lg.fa-fw.fa-list-alt
+                  %span.menu-item-parent Productos
           %li
-            %a{href: "#", title: "Módulo de Almacen y Artículos"}
+            %a{href: "#", title: "Módulo de Almacén"}
               %i.fa.fa-lg.fa-fw.fa-book
-              %span.menu-item-parent Almacen y Artículos
+              %span.menu-item-parent Almacén
             %ul
               %li
-                %a{href: "#{articles_path}", title: "Artículos"}
+                %a{href: "#{products_lots_path}", title: "Almacen"}
                   %i.fa.fa-lg.fa-fw.fa-list-alt
-                  %span.menu-item-parent Artículos
-              %li
-                %a{href: "#{stock_for_articles_path}", title: "Almacen"}
-                  %i.fa.fa-lg.fa-fw.fa-list-alt
-                  %span.menu-item-parent Almacen
+                  %span.menu-item-parent Almacén
           %li
             %a{href: "#", title: "Módulo de Ventas y Compras"}
               %i.fa.fa-lg.fa-fw.fa-book

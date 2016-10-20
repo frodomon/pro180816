@@ -16,16 +16,16 @@
             %th{"style"=>"text-align:center"} Fecha de Vencimiento
             %th{"style"=>"text-align:center"} Lote
         %tbody
-          - @articles.each do |unit|
+          - @products.each do |unit|
             %tr
               %td{"style"=>"text-align:center"}
-                = Article.find(unit.article_id).name
+                = unit.name
               %td{"style"=>"text-align:center"}
                 = unit.quantity.to_s
               %td{"style"=>"text-align:center"}
                 = unit.due_date.to_s
               %td{"style"=>"text-align:center"}
-                = unit.lote.to_s
+                = unit.lot_number.to_s
 
 :javascript
   // DO NOT REMOVE : GLOBAL FUNCTIONS!

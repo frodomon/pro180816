@@ -12,7 +12,8 @@
           %thead
             %tr
               %th Código
-              %th Cliente
+              %th Razón Social
+              %th RUC
               %th Contrato
               %th Codigo
               %th Fecha
@@ -21,7 +22,9 @@
               %td 
                 = @contract.id.to_s
               %td 
-                = Client.find(@contract.client_id).name + Client.find(@contract.client_id).ruc
+                = Client.find(@contract.client_id).name
+              %td 
+                = Client.find(@contract.client_id).ruc
               %td 
                 = @contract.name.to_s
               %td 
